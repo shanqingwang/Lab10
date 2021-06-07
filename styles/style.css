@@ -35,6 +35,12 @@ header img {
   top: 20px;
 }
 
+header button {
+  position: absolute;
+  left: 15px;
+  top: 20px;
+}
+
 header img:hover {
   cursor: pointer;
   opacity: 0.5;

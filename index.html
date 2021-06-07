@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script src="//cdn.split.io/sdk/split-10.15.7.min.js"></script>
-
 <head>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PS32G4Z');</script>
+  <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +22,14 @@
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PS32G4Z"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <header>
     <h1>Journal Entries</h1>
     <img src="./styles/settings.svg" alt="settings" width=40 height=40>
+    <button alt="home" id="home">Home</button>
   </header>
 
   <main class="double-column"></main>
@@ -37,7 +47,48 @@
   <script src="./scripts/script.js" type="module"></script>
 
   <!-- Split Script -->
-  <script src="//cdn.split.io/sdk/split-10.15.7.min.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+  <!-- Split SDK loaded via CDN. -->
+  <script src="https://cdn.split.io/sdk/split-10.15.7.js"></script>
+  <!-- Our custom script. -->
+  <script type="text/javascript">
+    (function() {
+    var factory = splitio({
+      core: {
+        authorizationKey: '47qb0lr4nb2ut4j3ji6k4gf7qqr6ch3moj3b',
+        key: 'user_id' // unique identifier for your user
+      }
+    });
+
+    var client = factory.client();
+
+    document.getElementById("home").style.visibility="hidden";
+
+    var attributes = {
+      key: Math.random() * 2
+    }
+
+    client.on(client.Event.SDK_READY, function() {
+      var treatment = client.getTreatment('double-column',
+                                      attributes);
+      console.log(treatment)
+
+      if (treatment === 'on') {
+        // Insert code for on treatment
+        document.getElementsByTagName('main')[0].classList.add('double-column');
+      } else if (treatment === 'off') {
+        // Insert code for off treatment
+        document.getElementsByTagName('main')[0].classList.remove('double-column');
+      } else {
+        // Insert code for control treatment
+      }
+
+      client.destroy().then(function() {
+        // Your data is successfully flushed.
+      });
+    });
+    })();
+  </script>
 </body>
 
 

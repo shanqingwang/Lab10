@@ -4,6 +4,7 @@ import { router } from './router.js';
 
 const headerText = document.querySelector('header > h1');
 const settings = document.querySelector('header > img');
+const home = document.querySelector('header > button');
 
 // When the back button is hit, set the state with the new page
 window.addEventListener('popstate', e => {
@@ -16,6 +17,11 @@ window.addEventListener('popstate', e => {
 
 // Go to header page when header button is clicked
 headerText.addEventListener('click', () => {
+  router.setState('home', false);
+});
+
+// Go to home page when header button is clicked
+home.addEventListener('click', () => {
   router.setState('home', false);
 });
 
